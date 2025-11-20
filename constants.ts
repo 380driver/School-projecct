@@ -34,7 +34,7 @@ export const CONTENT_SECTIONS: SectionData[] = [
       "The digitalization of banking services in the United States has significantly reshaped the sector. Adoption of mobile platforms, cloud computing, and AI has improved operational efficiency.",
       "These transformations play a vital role in expanding financial inclusion to underserved populations. Using Capital One as our primary subject, we examine how major US banks balance innovation with resilience."
     ],
-    imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+    imageUrl: "https://images.unsplash.com/photo-1614028674026-a65e31bfd27c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
   },
   {
     id: 'explanation',

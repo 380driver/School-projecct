@@ -1,9 +1,16 @@
-
 import React from 'react';
 import { SectionData } from '../../types';
 import { Card } from '../ui/Card';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Cloud, Cpu, TrendingUp, Lock, Globe } from 'lucide-react';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 
 interface Props {
   data: SectionData;

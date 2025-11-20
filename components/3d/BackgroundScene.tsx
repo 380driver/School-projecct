@@ -4,28 +4,10 @@ import { Float, Stars, MeshDistortMaterial, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Fix for missing JSX types in strict environments
-// We declare these in both the global JSX namespace and the React module JSX namespace
-// to ensure compatibility across different TypeScript configurations.
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      ambientLight: any;
-      pointLight: any;
-      instancedMesh: any;
-      boxGeometry: any;
-      meshStandardMaterial: any;
-    }
-  }
-}
-
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      ambientLight: any;
-      pointLight: any;
-      instancedMesh: any;
-      boxGeometry: any;
-      meshStandardMaterial: any;
+      [elemName: string]: any;
     }
   }
 }

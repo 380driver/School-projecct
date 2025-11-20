@@ -1,6 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
 export const Logo = () => {
   return (
     <div className="flex items-center select-none relative group">
