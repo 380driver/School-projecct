@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BackgroundScene } from './components/3d/BackgroundScene';
+import { BackgroundScene } from './components/BackgroundScene';
 import { Logo } from './components/ui/Logo';
 import { Hero } from './components/sections/Hero';
 import { ContentDisplay } from './components/sections/ContentDisplay';
