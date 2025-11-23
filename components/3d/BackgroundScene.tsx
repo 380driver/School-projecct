@@ -3,19 +3,6 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Stars, MeshDistortMaterial, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Augment JSX namespace to satisfy TypeScript if R3F types aren't picked up automatically
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      instancedMesh: any;
-      boxGeometry: any;
-      meshStandardMaterial: any;
-      ambientLight: any;
-      pointLight: any;
-    }
-  }
-}
-
 const AnimatedSphere = () => {
   const meshRef = useRef<THREE.Mesh>(null);
 
