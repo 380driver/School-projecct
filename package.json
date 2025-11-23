@@ -9,23 +9,34 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^9.96.1",
-    "@react-three/fiber": "^8.15.12",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+
+    "@react-three/fiber": "8.15.10",
+    "@react-three/drei": "9.96.1",
+    "three": "0.158.0",
+
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "recharts": "^2.10.3",
-    "three": "^0.160.0"
+    "recharts": "^2.10.3"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "resolutions": {
+    "@react-three/drei": "9.96.1",
+    "@react-three/fiber": "8.15.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions"
   }
 }
