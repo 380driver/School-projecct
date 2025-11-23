@@ -1,14 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { motion } from 'framer-motion';
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [elemName: string]: any;
-    }
-  }
-}
-
 interface CardProps extends PropsWithChildren {
   title?: string;
   delay?: number;

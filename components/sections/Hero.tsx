@@ -2,14 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      [elemName: string]: any;
-    }
-  }
-}
-
 export const Hero = () => {
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center z-10 px-4">

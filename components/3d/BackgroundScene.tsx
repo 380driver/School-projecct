@@ -1,13 +1,17 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Stars, MeshDistortMaterial, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Fix for missing JSX types in strict environments
+// Augment JSX namespace to satisfy TypeScript if R3F types aren't picked up automatically
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      [elemName: string]: any;
+      instancedMesh: any;
+      boxGeometry: any;
+      meshStandardMaterial: any;
+      ambientLight: any;
+      pointLight: any;
     }
   }
 }
@@ -73,13 +77,15 @@ export const BackgroundScene = () => {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none opacity-60">
       <Canvas camera={{ position: [0, 0, 5] }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#D03027" />
-        
-        <AnimatedSphere />
-        <DataParticles />
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
+          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#D03027" />
+          
+          <AnimatedSphere />
+          <DataParticles />
+          <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+        </Suspense>
       </Canvas>
     </div>
   );
