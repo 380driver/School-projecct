@@ -72,7 +72,7 @@ export const EnoAssistant = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(true)}
-                className={`fixed bottom-8 right-8 z-50 p-4 rounded-full shadow-2xl transition-colors ${isOpen ? 'bg-slate-800 text-slate-400' : 'bg-gradient-to-r from-[#004879] to-[#D03027] text-white'
+                className={`fixed bottom-8 left-8 z-50 p-4 rounded-full shadow-2xl transition-colors ${isOpen ? 'bg-slate-800 text-slate-400' : 'bg-gradient-to-r from-[#004879] to-[#D03027] text-white'
                     }`}
             >
                 {isOpen ? <X className="w-6 h-6" /> : <Bot className="w-8 h-8" />}
@@ -85,7 +85,7 @@ export const EnoAssistant = () => {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 right-4 md:right-8 z-50 w-[350px] max-w-[calc(100vw-32px)] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[600px]"
+                        className="fixed bottom-24 left-4 md:left-8 z-50 w-[350px] max-w-[calc(100vw-32px)] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[600px]"
                     >
                         {/* Header */}
                         <div className="bg-slate-800 p-4 border-b border-slate-700 flex items-center gap-3">
@@ -110,8 +110,8 @@ export const EnoAssistant = () => {
                                 >
                                     <div
                                         className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${msg.sender === 'user'
-                                                ? 'bg-cyan-600 text-white rounded-tr-none'
-                                                : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
+                                            ? 'bg-cyan-600 text-white rounded-tr-none'
+                                            : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
                                             }`}
                                     >
                                         {msg.text}

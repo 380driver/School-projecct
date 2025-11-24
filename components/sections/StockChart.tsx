@@ -56,7 +56,12 @@ export const StockChart = () => {
                     </p>
                 </motion.div>
 
-                <Card className="h-[500px] w-full !p-2 md:!p-6">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="h-[500px] w-full bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-xl p-2 md:p-6 shadow-xl"
+                >
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart
                             data={data}
@@ -111,7 +116,7 @@ export const StockChart = () => {
                             ))}
                         </AreaChart>
                     </ResponsiveContainer>
-                </Card>
+                </motion.div>
             </div>
         </section>
     );

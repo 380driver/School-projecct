@@ -1,77 +1,55 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Terminal, ShieldAlert, Lock } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ShieldAlert, Lock, FileText, Unlock } from 'lucide-react';
 
-interface Command {
-    input: string;
-    output: React.ReactNode;
-}
+const FILES = [
+    {
+        id: 'breach_report',
+        name: 'breach_report_2019.txt',
+        type: 'text',
+        content: (
+            <div className="text-red-400">
+                <strong className="block text-red-500 mb-2">CRITICAL INCIDENT REPORT</strong>
+                <p>Date: July 29, 2019</p>
+                <p>Subject: Unauthorized Access</p>
+                <br />
+                <p>Summary: A hacker gained access to 100 million credit card applications.</p>
+                <p>Method: Server-Side Request Forgery (SSRF) vulnerability in the WAF.</p>
+                <p>Impact: Social Security numbers and bank account numbers compromised.</p>
+            </div>
+        )
+    },
+    {
+        id: 'aws_config',
+        name: 'aws_bucket_config.json',
+        type: 'json',
+        content: (
+            <div className="text-yellow-400 font-mono text-xs">
+                {`{
+  "bucket": "capitalone-data",
+  "permissions": "public-read",
+  "encryption": false,
+  "waf-status": "misconfigured"
+}`}
+            </div>
+        )
+    },
+    {
+        id: 'audit_log',
+        name: 'security_audit.log',
+        type: 'log',
+        content: (
+            <div className="text-slate-400 font-mono text-xs">
+                <p>[ERROR] WAF Rule Set 403 Bypass detected</p>
+                <p>[WARN] IAM Role 'WAF-Role' has excessive permissions</p>
+                <p>[ALERT] Metadata service accessed from external IP</p>
+            </div>
+        )
+    }
+];
 
 export const HackerTerminal = () => {
-    const [history, setHistory] = useState<Command[]>([
-        { input: 'init_sequence', output: 'Initializing secure connection... [OK]' },
-        { input: 'auth_check', output: 'Access Level: RESTRICTED. Breach detected.' }
-    ]);
-    const [input, setInput] = useState('');
-    const bottomRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [history]);
-
-    const handleCommand = (e: React.FormEvent) => {
-        e.preventDefault();
-        const cmd = input.trim().toLowerCase();
-        let output: React.ReactNode = '';
-
-        switch (cmd) {
-            case 'help':
-                output = (
-                    <div className="text-slate-400">
-                        Available commands:
-                        <br />- <span className="text-cyan-400">ls</span>: List files
-                        <br />- <span className="text-cyan-400">cat [file]</span>: Read file content
-                        <br />- <span className="text-cyan-400">whoami</span>: Display current user
-                        <br />- <span className="text-cyan-400">clear</span>: Clear terminal
-                    </div>
-                );
-                break;
-            case 'ls':
-                output = (
-                    <div className="grid grid-cols-2 gap-4 text-cyan-300">
-                        <span>breach_report_2019.txt</span>
-                        <span>aws_bucket_config.json</span>
-                        <span>paige_thompson_profile.dat</span>
-                        <span>security_audit.log</span>
-                    </div>
-                );
-                break;
-            case 'cat breach_report_2019.txt':
-                output = (
-                    <div className="text-red-400 border-l-2 border-red-500 pl-2">
-                        CRITICAL ALERT: 100+ Million records exposed.
-                        <br />Cause: Misconfigured Web Application Firewall (WAF).
-                        <br />Impact: Credit scores, balances, and social security numbers compromised.
-                    </div>
-                );
-                break;
-            case 'cat aws_bucket_config.json':
-                output = <span className="text-yellow-400">Error: Permission Denied. Encrypted file.</span>;
-                break;
-            case 'whoami':
-                output = "Guest User (Unverified)";
-                break;
-            case 'clear':
-                setHistory([]);
-                setInput('');
-                return;
-            default:
-                output = <span className="text-red-500">Command not found: {cmd}. Type 'help' for list.</span>;
-        }
-
-        setHistory([...history, { input: cmd, output }]);
-        setInput('');
-    };
+    const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
     return (
         <section className="py-20 px-4 bg-black font-mono relative overflow-hidden">
@@ -91,58 +69,67 @@ export const HackerTerminal = () => {
                         The Data Breach Terminal
                     </h2>
                     <p className="text-slate-500 text-sm">
-                        Explore the technical details of the 2019 Capital One breach.
+                        Access the server files to uncover the truth about the breach.
                     </p>
                 </motion.div>
 
-                <div className="bg-slate-950 border border-slate-800 rounded-lg shadow-2xl overflow-hidden">
-                    {/* Terminal Header */}
-                    <div className="bg-slate-900 px-4 py-2 flex items-center gap-2 border-b border-slate-800">
-                        <div className="flex gap-1.5">
-                            <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-                        </div>
-                        <div className="flex-1 text-center text-xs text-slate-500 flex items-center justify-center gap-2">
+                <div className="bg-slate-950 border border-slate-800 rounded-lg shadow-2xl overflow-hidden flex flex-col md:flex-row h-[500px]">
+                    {/* Sidebar / File List */}
+                    <div className="w-full md:w-1/3 bg-slate-900 border-r border-slate-800 p-4">
+                        <div className="flex items-center gap-2 text-slate-400 mb-4 text-xs uppercase tracking-wider font-bold">
                             <Lock className="w-3 h-3" />
-                            root@capitalone-server:~
+                            Encrypted Files
+                        </div>
+                        <div className="space-y-2">
+                            {FILES.map((file) => (
+                                <button
+                                    key={file.id}
+                                    onClick={() => setSelectedFile(file.id)}
+                                    className={`w-full text-left p-3 rounded-lg flex items-center gap-3 transition-all ${selectedFile === file.id
+                                            ? 'bg-cyan-900/30 text-cyan-400 border border-cyan-500/30'
+                                            : 'hover:bg-slate-800 text-slate-400 border border-transparent'
+                                        }`}
+                                >
+                                    <FileText className="w-4 h-4" />
+                                    <span className="text-sm font-mono truncate">{file.name}</span>
+                                </button>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Terminal Body */}
-                    <div className="p-4 h-[400px] overflow-y-auto font-mono text-sm md:text-base" onClick={() => document.getElementById('terminal-input')?.focus()}>
-                        {history.map((entry, i) => (
-                            <div key={i} className="mb-4">
-                                <div className="flex gap-2 text-slate-400">
-                                    <span className="text-green-500">➜</span>
-                                    <span className="text-cyan-300">~</span>
-                                    <span>{entry.input}</span>
-                                </div>
-                                <div className="mt-1 text-slate-300 pl-4">
-                                    {entry.output}
-                                </div>
-                            </div>
-                        ))}
+                    {/* Content Area */}
+                    <div className="flex-1 bg-slate-950 p-6 relative overflow-hidden">
+                        <AnimatePresence mode="wait">
+                            {selectedFile ? (
+                                <motion.div
+                                    key={selectedFile}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -20 }}
+                                    className="h-full"
+                                >
+                                    <div className="flex items-center gap-2 text-green-500 mb-4 border-b border-green-900/30 pb-2">
+                                        <Unlock className="w-4 h-4" />
+                                        <span className="text-xs font-mono uppercase">Decryption Successful</span>
+                                    </div>
+                                    <div className="font-mono text-sm leading-relaxed">
+                                        {FILES.find(f => f.id === selectedFile)?.content}
+                                    </div>
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="h-full flex flex-col items-center justify-center text-slate-600"
+                                >
+                                    <Lock className="w-12 h-12 mb-4 opacity-50" />
+                                    <p className="text-sm font-mono">Select a file to decrypt contents...</p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
 
-                        <form onSubmit={handleCommand} className="flex gap-2 items-center mt-4">
-                            <span className="text-green-500">➜</span>
-                            <span className="text-cyan-300">~</span>
-                            <input
-                                id="terminal-input"
-                                type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                className="bg-transparent border-none outline-none text-slate-200 flex-1 focus:ring-0 p-0"
-                                autoComplete="off"
-                                autoFocus
-                            />
-                            <motion.span
-                                animate={{ opacity: [0, 1, 0] }}
-                                transition={{ repeat: Infinity, duration: 0.8 }}
-                                className="w-2 h-4 bg-slate-400 block"
-                            />
-                        </form>
-                        <div ref={bottomRef} />
+                        {/* Scanline effect */}
+                        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-20 bg-[length:100%_2px,3px_100%] pointer-events-none"></div>
                     </div>
                 </div>
             </div>
