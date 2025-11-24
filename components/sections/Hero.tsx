@@ -17,12 +17,12 @@ export const Hero = () => {
       </motion.div>
 
       <motion.h1
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 50 }}
         className="text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-500 mb-6 max-w-5xl"
       >
-        Digital Disruption & <br/> 
+        Digital Disruption & <br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#004879] to-[#D03027]">Banking Policies</span>
       </motion.h1>
 
