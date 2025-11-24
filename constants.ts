@@ -62,15 +62,18 @@ export const CONTENT_SECTIONS: SectionData[] = [
       },
       {
         title: "2015: Cloud Migration",
-        description: "Capital One became the first major US bank to announce a full migration to the public cloud (AWS). This bold move enabled faster product innovation, on-demand scalability, and enhanced security capabilities."
+        description: "Capital One became the first major US bank to announce a full migration to the public cloud (AWS). This bold move enabled faster product innovation, on-demand scalability, and enhanced security capabilities.",
+        link: "https://aws.amazon.com/solutions/case-studies/capital-one-all-in-on-aws/"
       },
       {
         title: "2017: Project Eno",
-        description: "Launch of Eno, an AI-powered virtual assistant that monitors accounts 24/7, creates virtual card numbers for safe online shopping, and proactively alerts customers about unusual charges."
+        description: "Launch of Eno, an AI-powered virtual assistant that monitors accounts 24/7, creates virtual card numbers for safe online shopping, and proactively alerts customers about unusual charges.",
+        link: "https://www.capitalone.com/digital/tools/eno/"
       },
       {
         title: "DevExchange Ecosystem",
-        description: "Capital One opened its APIs to third-party developers via DevExchange, fostering an open banking environment where external apps can securely integrate with bank data to create new value."
+        description: "Capital One opened its APIs to third-party developers via DevExchange, fostering an open banking environment where external apps can securely integrate with bank data to create new value.",
+        link: "https://developer.capitalone.com/home"
       }
     ],
     imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"

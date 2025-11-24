@@ -52,14 +52,14 @@ export const Timeline = () => {
                                         transition={{ delay: index * 0.1 }}
                                         onClick={() => setActiveEvent(index)}
                                         className={`group cursor-pointer flex items-center gap-6 p-4 rounded-xl transition-all duration-300 ${isActive
-                                                ? 'bg-slate-800/50 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.1)]'
-                                                : 'hover:bg-slate-800/30 border border-transparent'
+                                            ? 'bg-slate-800/50 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.1)]'
+                                            : 'hover:bg-slate-800/30 border border-transparent'
                                             }`}
                                     >
                                         {/* Dot Indicator */}
                                         <div className={`w-4 h-4 rounded-full border-2 transition-all duration-300 flex-shrink-0 ${isActive
-                                                ? 'bg-cyan-500 border-cyan-400 scale-125 shadow-[0_0_10px_rgba(6,182,212,0.5)]'
-                                                : 'bg-slate-900 border-slate-600 group-hover:border-cyan-500/50'
+                                            ? 'bg-cyan-500 border-cyan-400 scale-125 shadow-[0_0_10px_rgba(6,182,212,0.5)]'
+                                            : 'bg-slate-900 border-slate-600 group-hover:border-cyan-500/50'
                                             }`} />
 
                                         <div className="flex-1">
@@ -110,10 +110,22 @@ export const Timeline = () => {
                                             {events[activeEvent].description}
                                         </p>
 
-                                        <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm uppercase tracking-widest group cursor-pointer hover:text-cyan-300 transition-colors">
-                                            <span>Learn more</span>
-                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                        </div>
+                                        {events[activeEvent].link ? (
+                                            <a
+                                                href={events[activeEvent].link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-2 text-cyan-400 font-bold text-sm uppercase tracking-widest group cursor-pointer hover:text-cyan-300 transition-colors"
+                                            >
+                                                <span>Learn more</span>
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </a>
+                                        ) : (
+                                            <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm uppercase tracking-widest group cursor-pointer hover:text-cyan-300 transition-colors">
+                                                <span>Learn more</span>
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </motion.div>

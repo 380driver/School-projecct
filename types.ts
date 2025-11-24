@@ -2,6 +2,7 @@
 export interface HighlightItem {
   title: string;
   description: string;
+  link?: string;
 }
 
 export interface SectionData {

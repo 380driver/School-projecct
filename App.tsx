@@ -13,6 +13,7 @@ import { PolicySimulator } from './components/sections/PolicySimulator';
 import { TransformationSection } from './components/sections/TransformationSection';
 import { HackerTerminal } from './components/sections/HackerTerminal';
 import { StockChart } from './components/sections/StockChart';
+import { CloudTechStack } from './components/sections/CloudTechStack';
 import { PerspectiveToggle } from './components/ui/PerspectiveToggle';
 import { PerspectiveProvider } from './context/PerspectiveContext';
 import { CONTENT_SECTIONS, NAV_ITEMS } from './constants';
@@ -159,6 +160,9 @@ const App = () => {
 
             {/* Stock Chart */}
             <StockChart />
+
+            {/* Cloud Tech Stack */}
+            <CloudTechStack />
 
             {/* Risk Assessment Section */}
             <RiskAssessment />
