@@ -6,23 +6,24 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preinstall": "npx npm-force-resolutions"
   },
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
-
     "@react-three/fiber": "8.15.10",
     "@react-three/drei": "9.96.1",
     "three": "0.158.0",
-
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
-    "recharts": "^2.10.3"
+    "recharts": "^2.10.3",
+    "canvas-confetti": "^1.9.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
+    "@types/canvas-confetti": "^1.6.4",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
@@ -35,8 +36,5 @@
     "@react-three/fiber": "8.15.10",
     "react": "18.2.0",
     "react-dom": "18.2.0"
-  },
-  "scripts": {
-    "preinstall": "npx npm-force-resolutions"
   }
 }
