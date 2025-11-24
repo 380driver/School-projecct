@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
+import { usePerspective } from '../../context/PerspectiveContext';
 
 export const Hero = () => {
+  const { perspective } = usePerspective();
+
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center z-10 px-4">
       <motion.div
@@ -22,8 +25,17 @@ export const Hero = () => {
         transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 50 }}
         className="text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-500 mb-6 max-w-5xl"
       >
-        Digital Disruption & <br />
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#004879] to-[#D03027]">Banking Policies</span>
+        {perspective === 'banker' ? (
+          <>
+            Digital Disruption & <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#004879] to-[#D03027]">Banking Policies</span>
+          </>
+        ) : (
+          <>
+            Consumer Impact & <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-orange-500">Financial Risk</span>
+          </>
+        )}
       </motion.h1>
 
       <motion.p
@@ -32,7 +44,11 @@ export const Hero = () => {
         transition={{ duration: 0.8, delay: 0.4 }}
         className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12"
       >
-        Impact on U.S. Banking Services: A Case Study of <strong className="text-white">Capital One</strong> in the Trump-Era.
+        {perspective === 'banker' ? (
+          <>Impact on U.S. Banking Services: A Case Study of <strong className="text-white">Capital One</strong> in the Trump-Era.</>
+        ) : (
+          <>How deregulation and data negligence affected <strong className="text-white">Everyday Americans</strong> during the Trump-Era.</>
+        )}
       </motion.p>
 
       <motion.div
