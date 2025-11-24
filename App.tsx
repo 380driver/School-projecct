@@ -5,6 +5,10 @@ import { Logo } from './components/ui/Logo';
 import { Hero } from './components/sections/Hero';
 import { ContentDisplay } from './components/sections/ContentDisplay';
 import { RiskAssessment } from './components/sections/RiskAssessment';
+import { Timeline } from './components/sections/Timeline';
+import { EnoAssistant } from './components/ui/EnoAssistant';
+import { QuizSection } from './components/sections/QuizSection';
+import { ComparisonSlider } from './components/ui/ComparisonSlider';
 import { CONTENT_SECTIONS, NAV_ITEMS } from './constants';
 import { Menu, X, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -53,8 +57,8 @@ const App = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-[33px] md:top-[34px] left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-            ? 'bg-[#020617]/90 backdrop-blur-xl border-b border-cyan-900/30 py-2 shadow-[0_0_30px_rgba(0,72,121,0.3)]'
-            : 'bg-transparent border-transparent py-4'
+          ? 'bg-[#020617]/90 backdrop-blur-xl border-b border-cyan-900/30 py-2 shadow-[0_0_30px_rgba(0,72,121,0.3)]'
+          : 'bg-transparent border-transparent py-4'
           }`}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-900/5 to-transparent pointer-events-none" />
@@ -126,13 +130,23 @@ const App = () => {
           {/* Connecting Line with glow */}
           <div className="absolute left-4 md:left-12 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent hidden md:block z-0 shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
 
+          {/* Comparison Slider */}
+          <ComparisonSlider />
+
           {CONTENT_SECTIONS.map((section, index) => (
-            <ContentDisplay key={section.id} data={section} index={index} />
+            section.id === 'explanation' ? (
+              <Timeline key={section.id} />
+            ) : (
+              <ContentDisplay key={section.id} data={section} index={index} />
+            )
           ))}
 
           {/* Risk Assessment Section */}
           <RiskAssessment />
         </div>
+
+        {/* Quiz Section */}
+        <QuizSection />
       </main>
 
       {/* Footer */}
@@ -146,6 +160,9 @@ const App = () => {
           </p>
         </div>
       </footer>
+
+      {/* Eno AI Assistant */}
+      <EnoAssistant />
     </div>
   );
 };
