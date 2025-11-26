@@ -71,7 +71,7 @@ export const EnoAssistant = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => setIsOpen(true)}
+                onClick={() => setIsOpen(!isOpen)}
                 className={`fixed bottom-8 left-8 z-50 p-4 rounded-full shadow-2xl transition-colors ${isOpen ? 'bg-slate-800 text-slate-400' : 'bg-gradient-to-r from-[#004879] to-[#D03027] text-white'
                     }`}
             >
