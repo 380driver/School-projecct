@@ -7,6 +7,7 @@ export const NAV_ITEMS = [
   { label: 'Analysis', id: 'analysis' },
   { label: 'Future', id: 'recommendations' },
   { label: 'Risk Lab', id: 'risk-assessment' },
+  { label: 'Credit Sim', id: 'credit-simulator' },
 ];
 
 export const CONTENT_SECTIONS: SectionData[] = [

@@ -13,6 +13,7 @@ import { PolicySimulator } from './components/sections/PolicySimulator';
 import { TransformationSection } from './components/sections/TransformationSection';
 import { HackerTerminal } from './components/sections/HackerTerminal';
 import { StockChart } from './components/sections/StockChart';
+import { CreditScoreSimulator } from './components/sections/CreditScoreSimulator';
 import { CloudTechStack } from './components/sections/CloudTechStack';
 import { PerspectiveToggle } from './components/ui/PerspectiveToggle';
 import { PerspectiveProvider } from './context/PerspectiveContext';
@@ -166,6 +167,9 @@ const App = () => {
 
             {/* Risk Assessment Section */}
             <RiskAssessment />
+
+            {/* Credit Score Simulator */}
+            <CreditScoreSimulator />
           </div>
 
           {/* Quiz Section */}

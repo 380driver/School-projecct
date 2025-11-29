@@ -1,29 +1,52 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Bot, ShieldCheck, CreditCard, HelpCircle } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, ShieldCheck, CreditCard, HelpCircle, Gauge } from 'lucide-react';
 
 interface Message {
     id: string;
     text: string;
     sender: 'user' | 'bot';
     timestamp: Date;
+    action?: {
+        label: string;
+        targetId: string;
+    };
 }
 
 const PREDEFINED_QUESTIONS = [
+    { id: 'score', text: "Check my credit score", icon: <Gauge className="w-4 h-4" /> },
     { id: 'security', text: "How does Eno protect my data?", icon: <ShieldCheck className="w-4 h-4" /> },
     { id: 'virtual_card', text: "What are virtual card numbers?", icon: <CreditCard className="w-4 h-4" /> },
-    { id: 'alerts', text: "Show me recent alerts", icon: <MessageSquare className="w-4 h-4" /> },
 ];
 
-const BOT_RESPONSES: Record<string, string> = {
-    security: "I monitor your accounts 24/7 using machine learning to detect unusual activity. If I see something suspicious, I'll alert you immediately via push notification or text.",
-    virtual_card: "Virtual card numbers allow you to shop online without exposing your actual credit card details. I can generate a unique number for each merchant to keep your real account safe.",
-    alerts: "I've noticed a recurring charge that's higher than usual this month. Would you like me to investigate?",
-    default: "I'm Eno, Capital One's intelligent assistant. I can help you manage your money, track spending, and keep your account secure. Select a topic below to learn more."
+const BOT_RESPONSES: Record<string, any> = {
+    security: {
+        text: "I monitor your accounts 24/7 using machine learning to detect unusual activity. If I see something suspicious, I'll alert you immediately via push notification or text."
+    },
+    virtual_card: {
+        text: "Virtual card numbers allow you to shop online without exposing your actual credit card details. I can generate a unique number for each merchant to keep your real account safe."
+    },
+    alerts: {
+        text: "I've noticed a recurring charge that's higher than usual this month. Would you like me to investigate?"
+    },
+    score: {
+        text: "Your credit score is a key indicator of your financial health. You can use our new Credit Score Simulator to see how different factors affect it.",
+        action: {
+            label: "Open Simulator",
+            targetId: "credit-simulator"
+        }
+    },
+    greeting: {
+        text: "Hi there! I'm Eno. I can help you with your account, security, or understanding your credit score."
+    },
+    default: {
+        text: "I'm not sure I understand that specific request yet. You can ask me about security, virtual cards, or your credit score."
+    }
 };
 
 export const EnoAssistant = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState<Message[]>([
         { id: 'welcome', text: "Hi! I'm Eno. How can I help you today?", sender: 'bot', timestamp: new Date() }
     ]);
@@ -38,29 +61,64 @@ export const EnoAssistant = () => {
         scrollToBottom();
     }, [messages, isTyping]);
 
-    const handleQuestionClick = (questionId: string, questionText: string) => {
+    const processInput = (text: string) => {
+        const lowerText = text.toLowerCase();
+
+        if (lowerText.includes('score') || lowerText.includes('credit') || lowerText.includes('fico')) {
+            return BOT_RESPONSES.score;
+        } else if (lowerText.includes('security') || lowerText.includes('protect') || lowerText.includes('safe') || lowerText.includes('hack')) {
+            return BOT_RESPONSES.security;
+        } else if (lowerText.includes('virtual') || lowerText.includes('card') || lowerText.includes('number')) {
+            return BOT_RESPONSES.virtual_card;
+        } else if (lowerText.includes('hi') || lowerText.includes('hello') || lowerText.includes('hey')) {
+            return BOT_RESPONSES.greeting;
+        }
+
+        return BOT_RESPONSES.default;
+    };
+
+    const handleSend = (text: string = inputValue) => {
+        if (!text.trim()) return;
+
         // Add user message
         const userMsg: Message = {
             id: Date.now().toString(),
-            text: questionText,
+            text: text,
             sender: 'user',
             timestamp: new Date()
         };
         setMessages(prev => [...prev, userMsg]);
+        setInputValue("");
         setIsTyping(true);
 
         // Simulate bot response delay
         setTimeout(() => {
-            const responseText = BOT_RESPONSES[questionId] || BOT_RESPONSES.default;
+            const response = processInput(text);
+
             const botMsg: Message = {
                 id: (Date.now() + 1).toString(),
-                text: responseText,
+                text: response.text,
                 sender: 'bot',
-                timestamp: new Date()
+                timestamp: new Date(),
+                action: response.action
             };
             setMessages(prev => [...prev, botMsg]);
             setIsTyping(false);
-        }, 1500);
+        }, 1000);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            handleSend();
+        }
+    };
+
+    const handleActionClick = (targetId: string) => {
+        const el = document.getElementById(targetId);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+            setIsOpen(false);
+        }
     };
 
     return (
@@ -85,10 +143,10 @@ export const EnoAssistant = () => {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-24 left-4 md:left-8 z-50 w-[350px] max-w-[calc(100vw-32px)] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[600px]"
+                        className="fixed bottom-24 left-4 md:left-8 z-50 w-[350px] max-w-[calc(100vw-32px)] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[600px] h-[500px]"
                     >
                         {/* Header */}
-                        <div className="bg-slate-800 p-4 border-b border-slate-700 flex items-center gap-3">
+                        <div className="bg-slate-800 p-4 border-b border-slate-700 flex items-center gap-3 shrink-0">
                             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#004879] to-[#D03027] flex items-center justify-center">
                                 <Bot className="w-6 h-6 text-white" />
                             </div>
@@ -102,20 +160,28 @@ export const EnoAssistant = () => {
                         </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/50 min-h-[300px]">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-950/50">
                             {messages.map((msg) => (
                                 <div
                                     key={msg.id}
-                                    className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                                    className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                                 >
                                     <div
-                                        className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${msg.sender === 'user'
+                                        className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${msg.sender === 'user'
                                             ? 'bg-cyan-600 text-white rounded-tr-none'
                                             : 'bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700'
                                             }`}
                                     >
                                         {msg.text}
                                     </div>
+                                    {msg.action && (
+                                        <button
+                                            onClick={() => handleActionClick(msg.action!.targetId)}
+                                            className="mt-2 text-xs bg-cyan-500/10 text-cyan-400 border border-cyan-500/50 px-3 py-1.5 rounded-full hover:bg-cyan-500/20 transition-colors flex items-center gap-1"
+                                        >
+                                            {msg.action.label} <Send className="w-3 h-3" />
+                                        </button>
+                                    )}
                                 </div>
                             ))}
 
@@ -131,23 +197,40 @@ export const EnoAssistant = () => {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Quick Actions / Input Area */}
-                        <div className="p-4 bg-slate-900 border-t border-slate-700">
-                            <p className="text-xs text-slate-500 mb-3 font-mono uppercase tracking-wider">Suggested Questions</p>
-                            <div className="flex flex-col gap-2">
-                                {PREDEFINED_QUESTIONS.map((q) => (
-                                    <button
-                                        key={q.id}
-                                        onClick={() => handleQuestionClick(q.id, q.text)}
-                                        disabled={isTyping}
-                                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800 transition-colors text-left text-sm text-slate-300 hover:text-cyan-400 group disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        <div className="p-1.5 rounded-md bg-slate-800 group-hover:bg-slate-700 transition-colors text-slate-400 group-hover:text-cyan-400">
+                        {/* Input Area */}
+                        <div className="p-3 bg-slate-900 border-t border-slate-700 shrink-0">
+                            {/* Suggestions (only show if no input) */}
+                            {messages.length < 3 && !inputValue && (
+                                <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-hide">
+                                    {PREDEFINED_QUESTIONS.map((q) => (
+                                        <button
+                                            key={q.id}
+                                            onClick={() => handleSend(q.text)}
+                                            className="whitespace-nowrap px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs text-slate-300 hover:bg-slate-700 hover:text-cyan-400 transition-colors flex items-center gap-2"
+                                        >
                                             {q.icon}
-                                        </div>
-                                        {q.text}
-                                    </button>
-                                ))}
+                                            {q.text}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+
+                            <div className="flex gap-2">
+                                <input
+                                    type="text"
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    onKeyDown={handleKeyDown}
+                                    placeholder="Type a message..."
+                                    className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors placeholder:text-slate-600"
+                                />
+                                <button
+                                    onClick={() => handleSend()}
+                                    disabled={!inputValue.trim() || isTyping}
+                                    className="bg-cyan-600 hover:bg-cyan-500 text-white p-2 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    <Send className="w-5 h-5" />
+                                </button>
                             </div>
                         </div>
                     </motion.div>
