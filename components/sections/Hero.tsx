@@ -23,7 +23,7 @@ export const Hero = () => {
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 50 }}
-        className="text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-500 mb-6 max-w-5xl"
+        className="text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-slate-900 via-slate-700 to-slate-500 dark:from-white dark:via-slate-200 dark:to-slate-500 mb-6 max-w-5xl"
       >
         {perspective === 'banker' ? (
           <>
@@ -42,12 +42,12 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
-        className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12"
+        className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mb-12"
       >
         {perspective === 'banker' ? (
-          <>Impact on U.S. Banking Services: A Case Study of <strong className="text-white">Capital One</strong> in the Trump-Era.</>
+          <>Impact on U.S. Banking Services: A Case Study of <strong className="text-slate-900 dark:text-white">Capital One</strong> in the Trump-Era.</>
         ) : (
-          <>How deregulation and data negligence affected <strong className="text-white">Everyday Americans</strong> during the Trump-Era.</>
+          <>How deregulation and data negligence affected <strong className="text-slate-900 dark:text-white">Everyday Americans</strong> during the Trump-Era.</>
         )}
       </motion.p>
 
@@ -57,7 +57,7 @@ export const Hero = () => {
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-12 animate-bounce"
       >
-        <ArrowDown className="w-8 h-8 text-slate-500" />
+        <ArrowDown className="w-8 h-8 text-slate-600 dark:text-slate-500" />
       </motion.div>
     </section>
   );

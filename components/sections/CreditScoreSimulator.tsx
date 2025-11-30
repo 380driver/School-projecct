@@ -67,7 +67,7 @@ export const CreditScoreSimulator = () => {
 
     return (
         <section id="credit-simulator" className="py-20 relative overflow-hidden">
-            <div className="absolute inset-0 bg-slate-950/50" />
+            <div className="absolute inset-0 bg-slate-50/50 dark:bg-slate-950/50" />
 
             <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
                 <motion.div
@@ -76,10 +76,10 @@ export const CreditScoreSimulator = () => {
                     viewport={{ once: true }}
                     className="mb-12 text-center"
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600">
                         Credit Score Simulator
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto">
+                    <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
                         See how different financial decisions impact your credit score in real-time.
                         This interactive tool demonstrates the key factors used in credit scoring models.
                     </p>
@@ -87,16 +87,16 @@ export const CreditScoreSimulator = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Controls */}
-                    <div className="lg:col-span-2 space-y-8 bg-slate-900/50 p-6 rounded-2xl border border-slate-800 backdrop-blur-sm">
+                    <div className="lg:col-span-2 space-y-8 bg-white/50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-sm">
 
                         {/* Payment History */}
                         <div>
                             <div className="flex justify-between mb-2">
-                                <label className="flex items-center gap-2 font-semibold text-slate-200">
+                                <label className="flex items-center gap-2 font-semibold text-slate-800 dark:text-slate-200">
                                     <CheckCircle className="w-4 h-4 text-cyan-500" />
                                     On-Time Payments
                                 </label>
-                                <span className="text-cyan-400 font-mono">{paymentHistory}%</span>
+                                <span className="text-cyan-600 dark:text-cyan-400 font-mono">{paymentHistory}%</span>
                             </div>
                             <input
                                 type="range"
@@ -104,7 +104,7 @@ export const CreditScoreSimulator = () => {
                                 max="100"
                                 value={paymentHistory}
                                 onChange={(e) => setPaymentHistory(Number(e.target.value))}
-                                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                                className="w-full h-2 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
                             />
                             <p className="text-xs text-slate-500 mt-1">Impact: High (35%) - The most important factor.</p>
                         </div>
@@ -112,11 +112,11 @@ export const CreditScoreSimulator = () => {
                         {/* Utilization */}
                         <div>
                             <div className="flex justify-between mb-2">
-                                <label className="flex items-center gap-2 font-semibold text-slate-200">
+                                <label className="flex items-center gap-2 font-semibold text-slate-800 dark:text-slate-200">
                                     <TrendingUp className="w-4 h-4 text-purple-500" />
                                     Credit Utilization
                                 </label>
-                                <span className="text-purple-400 font-mono">{utilization}%</span>
+                                <span className="text-purple-600 dark:text-purple-400 font-mono">{utilization}%</span>
                             </div>
                             <input
                                 type="range"
@@ -124,7 +124,7 @@ export const CreditScoreSimulator = () => {
                                 max="100"
                                 value={utilization}
                                 onChange={(e) => setUtilization(Number(e.target.value))}
-                                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                                className="w-full h-2 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
                             />
                             <p className="text-xs text-slate-500 mt-1">Impact: High (30%) - Keep below 30% for best results.</p>
                         </div>
@@ -132,11 +132,11 @@ export const CreditScoreSimulator = () => {
                         {/* Credit Age */}
                         <div>
                             <div className="flex justify-between mb-2">
-                                <label className="flex items-center gap-2 font-semibold text-slate-200">
+                                <label className="flex items-center gap-2 font-semibold text-slate-800 dark:text-slate-200">
                                     <Info className="w-4 h-4 text-blue-500" />
                                     Average Credit Age
                                 </label>
-                                <span className="text-blue-400 font-mono">{creditAge} Years</span>
+                                <span className="text-blue-600 dark:text-blue-400 font-mono">{creditAge} Years</span>
                             </div>
                             <input
                                 type="range"
@@ -144,7 +144,7 @@ export const CreditScoreSimulator = () => {
                                 max="25"
                                 value={creditAge}
                                 onChange={(e) => setCreditAge(Number(e.target.value))}
-                                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                                className="w-full h-2 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
                             />
                             <p className="text-xs text-slate-500 mt-1">Impact: Medium (15%) - Longer history is better.</p>
                         </div>
@@ -153,11 +153,11 @@ export const CreditScoreSimulator = () => {
                             {/* Total Accounts */}
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <label className="flex items-center gap-2 font-semibold text-slate-200">
+                                    <label className="flex items-center gap-2 font-semibold text-slate-800 dark:text-slate-200">
                                         <Info className="w-4 h-4 text-emerald-500" />
                                         Total Accounts
                                     </label>
-                                    <span className="text-emerald-400 font-mono">{totalAccounts}</span>
+                                    <span className="text-emerald-600 dark:text-emerald-400 font-mono">{totalAccounts}</span>
                                 </div>
                                 <input
                                     type="range"
@@ -165,7 +165,7 @@ export const CreditScoreSimulator = () => {
                                     max="30"
                                     value={totalAccounts}
                                     onChange={(e) => setTotalAccounts(Number(e.target.value))}
-                                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                                    className="w-full h-2 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                                 />
                                 <p className="text-xs text-slate-500 mt-1">Impact: Low (10%) - Mix of credit types.</p>
                             </div>
@@ -173,11 +173,11 @@ export const CreditScoreSimulator = () => {
                             {/* Inquiries */}
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <label className="flex items-center gap-2 font-semibold text-slate-200">
+                                    <label className="flex items-center gap-2 font-semibold text-slate-800 dark:text-slate-200">
                                         <AlertTriangle className="w-4 h-4 text-orange-500" />
                                         Hard Inquiries
                                     </label>
-                                    <span className="text-orange-400 font-mono">{inquiries}</span>
+                                    <span className="text-orange-600 dark:text-orange-400 font-mono">{inquiries}</span>
                                 </div>
                                 <input
                                     type="range"
@@ -185,7 +185,7 @@ export const CreditScoreSimulator = () => {
                                     max="10"
                                     value={inquiries}
                                     onChange={(e) => setInquiries(Number(e.target.value))}
-                                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    className="w-full h-2 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
                                 />
                                 <p className="text-xs text-slate-500 mt-1">Impact: Low (10%) - Too many can hurt.</p>
                             </div>
@@ -194,8 +194,8 @@ export const CreditScoreSimulator = () => {
                     </div>
 
                     {/* Score Display */}
-                    <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(0,0,0,0.3)]">
-                        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/50 to-transparent rounded-2xl pointer-events-none" />
+                    <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_50px_rgba(0,0,0,0.3)]">
+                        <div className="absolute inset-0 bg-gradient-to-b from-slate-100/50 dark:from-slate-800/50 to-transparent rounded-2xl pointer-events-none" />
 
                         <motion.div
                             key={score}
@@ -217,7 +217,7 @@ export const CreditScoreSimulator = () => {
                                 <span>Poor</span>
                                 <span>Exceptional</span>
                             </div>
-                            <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div className="h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                                 <motion.div
                                     className={`h-full ${color.replace('text-', 'bg-')}`}
                                     initial={{ width: 0 }}
@@ -225,7 +225,7 @@ export const CreditScoreSimulator = () => {
                                     transition={{ type: "spring", stiffness: 50 }}
                                 />
                             </div>
-                            <div className="flex justify-between text-xs font-mono text-slate-600">
+                            <div className="flex justify-between text-xs font-mono text-slate-400 dark:text-slate-600">
                                 <span>300</span>
                                 <span>850</span>
                             </div>

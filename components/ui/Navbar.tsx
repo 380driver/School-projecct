@@ -31,7 +31,7 @@ export const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-[33px] md:top-[34px] left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'bg-[#020617]/90 dark:bg-[#020617]/90 bg-white/90 backdrop-blur-xl border-b border-cyan-900/30 py-2 shadow-[0_0_30px_rgba(0,72,121,0.3)]'
+          ? 'bg-white/90 dark:bg-[#020617]/90 backdrop-blur-xl border-b border-slate-200 dark:border-cyan-900/30 py-2 shadow-sm dark:shadow-[0_0_30px_rgba(0,72,121,0.3)]'
           : 'bg-transparent border-transparent py-4'
           }`}
       >

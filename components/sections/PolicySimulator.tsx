@@ -57,8 +57,8 @@ export const PolicySimulator = () => {
                         <div className="space-y-8 mt-4">
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <label className="text-slate-300 font-semibold">Deregulation Level</label>
-                                    <span className="text-cyan-400">{deregulation}%</span>
+                                    <label className="text-slate-700 dark:text-slate-300 font-semibold">Deregulation Level</label>
+                                    <span className="text-cyan-600 dark:text-cyan-400">{deregulation}%</span>
                                 </div>
                                 <input
                                     type="range"
@@ -66,7 +66,7 @@ export const PolicySimulator = () => {
                                     max="100"
                                     value={deregulation}
                                     onChange={(e) => setDeregulation(Number(e.target.value))}
-                                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                                    className="w-full h-2 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
                                 />
                                 <p className="text-xs text-slate-500 mt-2">
                                     Reducing restrictions on banking activities and capital requirements.
@@ -75,8 +75,8 @@ export const PolicySimulator = () => {
 
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <label className="text-slate-300 font-semibold">Interest Rate Environment</label>
-                                    <span className="text-cyan-400">{interestRate}%</span>
+                                    <label className="text-slate-700 dark:text-slate-300 font-semibold">Interest Rate Environment</label>
+                                    <span className="text-cyan-600 dark:text-cyan-400">{interestRate}%</span>
                                 </div>
                                 <input
                                     type="range"
@@ -84,7 +84,7 @@ export const PolicySimulator = () => {
                                     max="100"
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(Number(e.target.value))}
-                                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+                                    className="w-full h-2 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
                                 />
                                 <p className="text-xs text-slate-500 mt-2">
                                     Base rates set by the Federal Reserve affecting borrowing costs.
@@ -98,12 +98,12 @@ export const PolicySimulator = () => {
                         <Card className="!p-4">
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-2">
-                                    <DollarSign className="text-green-400 w-5 h-5" />
-                                    <span className="font-semibold text-slate-200">Bank Profitability</span>
+                                    <DollarSign className="text-green-500 dark:text-green-400 w-5 h-5" />
+                                    <span className="font-semibold text-slate-800 dark:text-slate-200">Bank Profitability</span>
                                 </div>
-                                <span className="text-slate-400">{Math.round(bankProfit)}%</span>
+                                <span className="text-slate-600 dark:text-slate-400">{Math.round(bankProfit)}%</span>
                             </div>
-                            <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
+                            <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                                 <motion.div
                                     className={`h-full ${getColor(bankProfit, true)}`}
                                     animate={{ width: `${bankProfit}%` }}
@@ -115,12 +115,12 @@ export const PolicySimulator = () => {
                         <Card className="!p-4">
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-2">
-                                    <AlertTriangle className="text-red-400 w-5 h-5" />
-                                    <span className="font-semibold text-slate-200">Consumer Risk</span>
+                                    <AlertTriangle className="text-red-500 dark:text-red-400 w-5 h-5" />
+                                    <span className="font-semibold text-slate-800 dark:text-slate-200">Consumer Risk</span>
                                 </div>
-                                <span className="text-slate-400">{Math.round(consumerRisk)}%</span>
+                                <span className="text-slate-600 dark:text-slate-400">{Math.round(consumerRisk)}%</span>
                             </div>
-                            <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
+                            <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                                 <motion.div
                                     className={`h-full ${getColor(consumerRisk, false)}`}
                                     animate={{ width: `${consumerRisk}%` }}
@@ -132,12 +132,12 @@ export const PolicySimulator = () => {
                         <Card className="!p-4">
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-2">
-                                    <TrendingUp className="text-blue-400 w-5 h-5" />
-                                    <span className="font-semibold text-slate-200">Market Stability</span>
+                                    <TrendingUp className="text-blue-500 dark:text-blue-400 w-5 h-5" />
+                                    <span className="font-semibold text-slate-800 dark:text-slate-200">Market Stability</span>
                                 </div>
-                                <span className="text-slate-400">{Math.round(marketStability)}%</span>
+                                <span className="text-slate-600 dark:text-slate-400">{Math.round(marketStability)}%</span>
                             </div>
-                            <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
+                            <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                                 <motion.div
                                     className={`h-full ${getColor(marketStability, true)}`}
                                     animate={{ width: `${marketStability}%` }}

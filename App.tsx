@@ -28,12 +28,12 @@ const App = () => {
   return (
     <ThemeProvider>
       <PerspectiveProvider>
-        <div className="relative min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-200 selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300">
+        <div className="relative min-h-screen bg-slate-100 dark:bg-[#020617] text-slate-900 dark:text-slate-200 selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300">
           {/* 3D Background Layer */}
           <BackgroundScene />
 
           {/* Top Info Bar */}
-          <div className="fixed top-0 left-0 right-0 z-[60] bg-white dark:bg-[#020617] border-b border-slate-200 dark:border-slate-800 py-2 px-4 md:px-8 flex justify-between items-center text-[10px] md:text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 transition-colors duration-300">
+          <div className="fixed top-0 left-0 right-0 z-[60] bg-slate-100 dark:bg-[#020617] border-b border-slate-300 dark:border-slate-800 py-2 px-4 md:px-8 flex justify-between items-center text-[10px] md:text-xs font-mono uppercase tracking-widest text-slate-600 dark:text-slate-400 transition-colors duration-300">
             <div className="flex items-center gap-2">
               <GraduationCap className="w-3 h-3 md:w-4 md:h-4 text-cyan-600 dark:text-cyan-500" />
               <span className="hidden md:inline">University of Coventry - </span>The Knowledge Hub

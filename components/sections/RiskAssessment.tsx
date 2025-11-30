@@ -89,7 +89,7 @@ export const RiskAssessment = () => {
   };
 
   return (
-    <section id="risk-assessment" className="py-24 px-4 relative z-10 overflow-hidden bg-slate-900/20">
+    <section id="risk-assessment" className="py-24 px-4 relative z-10 overflow-hidden bg-slate-100/20 dark:bg-slate-900/20">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -98,13 +98,13 @@ export const RiskAssessment = () => {
           className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20">
-            <AlertTriangle className="w-5 h-5 text-red-500" />
-            <span className="text-red-400 font-mono tracking-wider text-sm uppercase">Interactive Lab</span>
+            <AlertTriangle className="w-5 h-5 text-red-600 dark:text-red-500" />
+            <span className="text-red-600 dark:text-red-400 font-mono tracking-wider text-sm uppercase">Interactive Lab</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-slate-500">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-slate-100 dark:to-slate-500">
             Risk Assessment Protocol
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Rate the severity of risks facing Capital One. Then, compare your assessment with the case study findings.
           </p>
         </motion.div>
@@ -123,17 +123,17 @@ export const RiskAssessment = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   whileHover={{ scale: 1.02 }}
                   viewport={{ once: true }}
-                  className={`bg-slate-900/50 backdrop-blur-md border rounded-xl p-6 transition-all group ${isSubmitted && !isMatch ? 'border-red-500/30' : 'border-slate-700/50 hover:border-cyan-500/30'
+                  className={`bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border rounded-xl p-6 transition-all group ${isSubmitted && !isMatch ? 'border-red-500/30' : 'border-slate-200 dark:border-slate-700/50 hover:border-cyan-500/30'
                     }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-start gap-4 flex-1">
-                      <div className="p-3 rounded-lg bg-slate-800/80 shadow-inner">
+                      <div className="p-3 rounded-lg bg-slate-200/80 dark:bg-slate-800/80 shadow-inner">
                         {risk.icon}
                       </div>
                       <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-3">
-                          <h3 className="text-lg font-bold text-slate-100">
+                          <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                             {risk.title}
                           </h3>
                           {isSubmitted && (
@@ -141,8 +141,8 @@ export const RiskAssessment = () => {
                               initial={{ opacity: 0, scale: 0.8 }}
                               animate={{ opacity: 1, scale: 1 }}
                               className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${isMatch
-                                  ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
-                                  : 'bg-red-500/10 border-red-500/40 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.1)]'
+                                ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-600 dark:text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
+                                : 'bg-red-500/10 border-red-500/40 text-red-600 dark:text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.1)]'
                                 }`}
                             >
                               {isMatch ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
@@ -150,7 +150,7 @@ export const RiskAssessment = () => {
                             </motion.div>
                           )}
                         </div>
-                        <p className="text-sm text-slate-400 mt-1 max-w-md">
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-md">
                           {risk.description}
                         </p>
                       </div>
@@ -158,16 +158,16 @@ export const RiskAssessment = () => {
 
                     {/* Rating Selector */}
                     <div className="flex flex-col gap-2 items-end">
-                      <div className="flex items-center gap-2 bg-slate-950/50 p-2 rounded-lg border border-slate-800">
+                      <div className="flex items-center gap-2 bg-slate-100/50 dark:bg-slate-950/50 p-2 rounded-lg border border-slate-200 dark:border-slate-800">
                         {[1, 2, 3, 4, 5].map((num) => (
                           <button
                             key={num}
                             disabled={isSubmitted}
                             onClick={() => handleRate(risk.id, num)}
                             className={`w-8 h-8 rounded-md text-sm font-bold transition-all duration-200 ${ratings[risk.id] >= num
-                                ? 'bg-cyan-600 text-white shadow-[0_0_10px_rgba(8,145,178,0.5)]'
-                                : 'bg-slate-800 text-slate-600'
-                              } ${isSubmitted ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-700'}`}
+                              ? 'bg-cyan-600 text-white shadow-[0_0_10px_rgba(8,145,178,0.5)]'
+                              : 'bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-600'
+                              } ${isSubmitted ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-300 dark:hover:bg-slate-700'}`}
                           >
                             {num}
                           </button>
@@ -175,7 +175,7 @@ export const RiskAssessment = () => {
                       </div>
                       {isSubmitted && (
                         <div className="text-xs font-mono text-slate-500">
-                          Expert Rating: <span className="text-red-400 font-bold">{risk.expertRating}</span>
+                          Expert Rating: <span className="text-red-500 dark:text-red-400 font-bold">{risk.expertRating}</span>
                         </div>
                       )}
                     </div>
@@ -188,10 +188,10 @@ export const RiskAssessment = () => {
                         initial={{ height: 0, opacity: 0, marginTop: 0 }}
                         animate={{ height: "auto", opacity: 1, marginTop: 16 }}
                         exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                        className="overflow-hidden border-t border-slate-700/50 pt-4"
+                        className="overflow-hidden border-t border-slate-200 dark:border-slate-700/50 pt-4"
                       >
-                        <div className="flex gap-3 text-sm text-slate-300 bg-slate-800/50 p-3 rounded-lg">
-                          <CheckCircle2 className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
+                        <div className="flex gap-3 text-sm text-slate-700 dark:text-slate-300 bg-slate-100/50 dark:bg-slate-800/50 p-3 rounded-lg">
+                          <CheckCircle2 className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
                           <p>{risk.insight}</p>
                         </div>
                       </motion.div>
@@ -205,10 +205,10 @@ export const RiskAssessment = () => {
           {/* Results Panel */}
           <div className="lg:col-span-1 space-y-6">
             <motion.div
-              className="sticky top-24 bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-8 shadow-2xl text-center"
+              className="sticky top-24 bg-gradient-to-b from-white to-slate-100 dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 shadow-2xl text-center"
               layout
             >
-              <h3 className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-6">
+              <h3 className="text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-widest mb-6">
                 {isSubmitted ? 'Analysis Comparison' : 'Your Assessment'}
               </h3>
 
@@ -217,7 +217,7 @@ export const RiskAssessment = () => {
                 <div className="text-center">
                   <div className="relative w-32 h-32 flex items-center justify-center mb-2">
                     <svg className="w-full h-full transform -rotate-90">
-                      <circle cx="64" cy="64" r="58" stroke="#1e293b" strokeWidth="8" fill="transparent" />
+                      <circle cx="64" cy="64" r="58" stroke="#1e293b" strokeWidth="8" fill="transparent" className="stroke-slate-200 dark:stroke-slate-800" />
                       <circle
                         cx="64" cy="64" r="58"
                         stroke={userAverage > 3.5 ? '#ef4444' : userAverage > 2 ? '#eab308' : '#22c55e'}
@@ -230,7 +230,7 @@ export const RiskAssessment = () => {
                       />
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-3xl font-black text-white">{userAverage.toFixed(1)}</span>
+                      <span className="text-3xl font-black text-slate-900 dark:text-white">{userAverage.toFixed(1)}</span>
                       <span className="text-[10px] text-slate-500 font-mono">USER</span>
                     </div>
                   </div>
@@ -246,7 +246,7 @@ export const RiskAssessment = () => {
                   >
                     <div className="relative w-32 h-32 flex items-center justify-center mb-2">
                       <svg className="w-full h-full transform -rotate-90">
-                        <circle cx="64" cy="64" r="58" stroke="#1e293b" strokeWidth="8" fill="transparent" />
+                        <circle cx="64" cy="64" r="58" stroke="#1e293b" strokeWidth="8" fill="transparent" className="stroke-slate-200 dark:stroke-slate-800" />
                         <circle
                           cx="64" cy="64" r="58"
                           stroke={expertAverage > 3.5 ? '#ef4444' : expertAverage > 2 ? '#eab308' : '#22c55e'}
@@ -259,7 +259,7 @@ export const RiskAssessment = () => {
                         />
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className="text-3xl font-black text-white">{expertAverage.toFixed(1)}</span>
+                        <span className="text-3xl font-black text-slate-900 dark:text-white">{expertAverage.toFixed(1)}</span>
                         <span className="text-[10px] text-slate-500 font-mono">EXPERT</span>
                       </div>
                     </div>
@@ -278,7 +278,7 @@ export const RiskAssessment = () => {
               ) : (
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg transition-colors"
+                  className="w-full py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-colors"
                 >
                   Reset Simulation
                 </button>

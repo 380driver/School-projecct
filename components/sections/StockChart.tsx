@@ -10,7 +10,7 @@ import {
     ReferenceDot
 } from 'recharts';
 import { motion } from 'framer-motion';
-import { Card } from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const data = [
     { year: '2016', price: 72, event: 'Election Year' },
@@ -24,10 +24,10 @@ const data = [
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-slate-900 border border-slate-700 p-4 rounded-lg shadow-xl">
-                <p className="text-cyan-400 font-bold mb-1">{label}</p>
-                <p className="text-white text-lg font-mono">${payload[0].value}</p>
-                <p className="text-slate-400 text-sm mt-2 italic">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4 rounded-lg shadow-xl">
+                <p className="text-cyan-600 dark:text-cyan-400 font-bold mb-1">{label}</p>
+                <p className="text-slate-900 dark:text-white text-lg font-mono">${payload[0].value}</p>
+                <p className="text-slate-600 dark:text-slate-400 text-sm mt-2 italic">
                     {payload[0].payload.event}
                 </p>
             </div>
@@ -38,6 +38,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const StockChart = () => {
     const [hoveredData, setHoveredData] = useState<any>(null);
+    const { theme } = useTheme();
+
+    const axisColor = theme === 'dark' ? '#94a3b8' : '#475569';
+    const gridColor = theme === 'dark' ? '#1e293b' : '#e2e8f0';
 
     return (
         <section className="py-20 px-4 relative z-10">
@@ -47,10 +51,10 @@ export const StockChart = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="text-center mb-12"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white">
                         Market Performance
                     </h2>
-                    <p className="text-slate-400 max-w-2xl mx-auto">
+                    <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
                         Capital One's stock price volatility during the Trump administration,
                         highlighting key policy events and the 2019 breach impact.
                     </p>
@@ -60,7 +64,7 @@ export const StockChart = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="h-[500px] w-full bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-xl p-2 md:p-6 shadow-xl"
+                    className="h-[500px] w-full bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200 dark:border-slate-700/50 rounded-xl p-2 md:p-6 shadow-xl"
                 >
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart
@@ -79,17 +83,17 @@ export const StockChart = () => {
                                     <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                            <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
                             <XAxis
                                 dataKey="year"
-                                stroke="#94a3b8"
-                                tick={{ fill: '#94a3b8' }}
+                                stroke={axisColor}
+                                tick={{ fill: axisColor }}
                                 axisLine={false}
                                 tickLine={false}
                             />
                             <YAxis
-                                stroke="#94a3b8"
-                                tick={{ fill: '#94a3b8' }}
+                                stroke={axisColor}
+                                tick={{ fill: axisColor }}
                                 axisLine={false}
                                 tickLine={false}
                                 tickFormatter={(value) => `$${value}`}

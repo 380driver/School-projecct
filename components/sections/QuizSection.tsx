@@ -86,7 +86,8 @@ export const QuizSection = () => {
     };
 
     return (
-        <section className="py-24 px-4 relative z-10 bg-slate-900/30">
+    return (
+        <section className="py-24 px-4 relative z-10 bg-slate-100/30 dark:bg-slate-900/30">
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -95,14 +96,14 @@ export const QuizSection = () => {
                     className="text-center mb-12"
                 >
                     <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20">
-                        <BrainCircuit className="w-5 h-5 text-indigo-400" />
-                        <span className="text-indigo-400 font-mono tracking-wider text-sm uppercase">Knowledge Check</span>
+                        <BrainCircuit className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                        <span className="text-indigo-600 dark:text-indigo-400 font-mono tracking-wider text-sm uppercase">Knowledge Check</span>
                     </div>
-                    <h2 className="text-4xl font-bold text-white mb-4">Test Your Knowledge</h2>
-                    <p className="text-slate-400">See how much you've learned about Capital One's digital transformation.</p>
+                    <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Test Your Knowledge</h2>
+                    <p className="text-slate-600 dark:text-slate-400">See how much you've learned about Capital One's digital transformation.</p>
                 </motion.div>
 
-                <div className="bg-slate-900/80 backdrop-blur-xl border border-slate-700 rounded-2xl p-8 shadow-2xl relative overflow-hidden min-h-[400px] flex flex-col justify-center">
+                <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-700 rounded-2xl p-8 shadow-2xl relative overflow-hidden min-h-[400px] flex flex-col justify-center">
                     {/* Background Gradient */}
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
 
@@ -120,20 +121,20 @@ export const QuizSection = () => {
                                     <span>Score: {score}</span>
                                 </div>
 
-                                <h3 className="text-2xl font-bold text-white mb-8 leading-relaxed">
+                                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 leading-relaxed">
                                     {QUESTIONS[currentQuestion].question}
                                 </h3>
 
                                 <div className="space-y-4">
                                     {QUESTIONS[currentQuestion].options.map((option, index) => {
-                                        let buttonStyle = "bg-slate-800 border-slate-700 hover:bg-slate-750";
+                                        let buttonStyle = "bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300";
                                         if (isAnswered) {
                                             if (index === QUESTIONS[currentQuestion].correctAnswer) {
-                                                buttonStyle = "bg-green-500/20 border-green-500 text-green-400";
+                                                buttonStyle = "bg-green-500/20 border-green-500 text-green-600 dark:text-green-400";
                                             } else if (index === selectedOption) {
-                                                buttonStyle = "bg-red-500/20 border-red-500 text-red-400";
+                                                buttonStyle = "bg-red-500/20 border-red-500 text-red-600 dark:text-red-400";
                                             } else {
-                                                buttonStyle = "bg-slate-800/50 border-slate-800 opacity-50";
+                                                buttonStyle = "bg-slate-100/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 opacity-50";
                                             }
                                         } else if (selectedOption === index) {
                                             buttonStyle = "bg-indigo-600 border-indigo-500 text-white";
@@ -148,10 +149,10 @@ export const QuizSection = () => {
                                             >
                                                 <span className="font-medium">{option}</span>
                                                 {isAnswered && index === QUESTIONS[currentQuestion].correctAnswer && (
-                                                    <CheckCircle2 className="w-5 h-5 text-green-400" />
+                                                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
                                                 )}
                                                 {isAnswered && index === selectedOption && index !== QUESTIONS[currentQuestion].correctAnswer && (
-                                                    <XCircle className="w-5 h-5 text-red-400" />
+                                                    <XCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
                                                 )}
                                             </button>
                                         );
@@ -162,10 +163,10 @@ export const QuizSection = () => {
                                     <motion.div
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mt-8 p-4 bg-slate-800/50 rounded-xl border border-slate-700"
+                                        className="mt-8 p-4 bg-slate-100/50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700"
                                     >
-                                        <p className="text-slate-300 text-sm">
-                                            <span className="font-bold text-indigo-400 block mb-1">Explanation:</span>
+                                        <p className="text-slate-700 dark:text-slate-300 text-sm">
+                                            <span className="font-bold text-indigo-600 dark:text-indigo-400 block mb-1">Explanation:</span>
                                             {QUESTIONS[currentQuestion].explanation}
                                         </p>
                                         <button
@@ -187,8 +188,8 @@ export const QuizSection = () => {
                                     <Trophy className="w-12 h-12 text-white" />
                                 </div>
 
-                                <h3 className="text-3xl font-bold text-white mb-2">Quiz Complete!</h3>
-                                <p className="text-slate-400 mb-8">You scored {score} out of {QUESTIONS.length}</p>
+                                <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Quiz Complete!</h3>
+                                <p className="text-slate-600 dark:text-slate-400 mb-8">You scored {score} out of {QUESTIONS.length}</p>
 
                                 <div className="flex justify-center gap-4">
                                     <button
