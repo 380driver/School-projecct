@@ -28,7 +28,7 @@ const App = () => {
   return (
     <ThemeProvider>
       <PerspectiveProvider>
-        <div className="relative min-h-screen bg-slate-100 dark:bg-[#020617] text-slate-900 dark:text-slate-200 selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300">
+        <div className="relative min-h-screen bg-slate-200 dark:bg-[#020617] text-slate-900 dark:text-slate-200 selection:bg-cyan-500/30 selection:text-cyan-200 transition-colors duration-300">
           {/* 3D Background Layer */}
           <BackgroundScene />
 
