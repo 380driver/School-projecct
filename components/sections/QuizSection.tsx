@@ -86,7 +86,6 @@ export const QuizSection = () => {
     };
 
     return (
-    return (
         <section className="py-24 px-4 relative z-10 bg-slate-100/30 dark:bg-slate-900/30">
             <div className="max-w-4xl mx-auto">
                 <motion.div
