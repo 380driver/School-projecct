@@ -6,6 +6,7 @@ interface PerspectiveContextType {
     perspective: PerspectiveType;
     togglePerspective: () => void;
     setPerspective: (p: PerspectiveType) => void;
+    accentColor: string;
 }
 
 const PerspectiveContext = createContext<PerspectiveContextType | undefined>(undefined);
@@ -17,8 +18,10 @@ export const PerspectiveProvider = ({ children }: { children: ReactNode }) => {
         setPerspective(prev => prev === 'banker' ? 'customer' : 'banker');
     };
 
+    const accentColor = perspective === 'banker' ? 'cyan' : 'rose';
+
     return (
-        <PerspectiveContext.Provider value={{ perspective, togglePerspective, setPerspective }}>
+        <PerspectiveContext.Provider value={{ perspective, togglePerspective, setPerspective, accentColor }}>
             {children}
         </PerspectiveContext.Provider>
     );
